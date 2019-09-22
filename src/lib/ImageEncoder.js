@@ -41,6 +41,9 @@ export default class ImageEncoder {
             break;
         }
       }
+        
+      if (LSB == -1)
+        break;
     }
 
     const base64 = await image.getBase64Async(Jimp.AUTO);

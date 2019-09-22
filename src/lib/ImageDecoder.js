@@ -43,6 +43,9 @@ export default class ImageDecoder {
         if (LSB == -1)
           break;
       }
+
+      if (LSB == -1)
+        break;
     }
 
     return characters.join('');
