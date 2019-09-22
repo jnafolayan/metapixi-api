@@ -17,7 +17,7 @@ export const encodeImage = [
 
       const result = await ImageEncoder.encode({
         message: encryptText(req.body.message, req.body.secretKey),
-        buffer: req.file.buffer,
+        buffer: req.file.buffer
       });
 
       res.status(200).json({
@@ -64,7 +64,7 @@ export const decodeImage = [
 ];
 
 const encryptText = (text, key) => {
-  const cipher = crypto.createCipheriv(ENCRYPTION_ALGORITHM, Buffer.from(key));
+  const cipher = crypto.createCipher(ENCRYPTION_ALGORITHM, Buffer.from(key));
   let encrypted = cipher.update(text);
   encrypted = Buffer.concat([encrypted, cipher.final()]);
   return encrypted.toString('hex');

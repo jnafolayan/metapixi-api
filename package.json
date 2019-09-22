@@ -6,9 +6,13 @@
   "author": "John Afolayan <jnafolayan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "develop": "nodemon --exec babel-node src/www.js"
+    "develop": "nodemon --exec babel-node src/www.js",
+    "start": "node dist/app.js",
+    "build": "rm -rf dist && babel src --out-dir dist",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
     "@babel/node": "^7.6.1",
     "@babel/preset-env": "^7.6.0",
