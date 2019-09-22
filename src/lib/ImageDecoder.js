@@ -39,6 +39,9 @@ export default class ImageDecoder {
       if (++imageCursor == imageData.length) {
         imageCursor = 0;
         LSB -= 1;
+
+        if (LSB == -1)
+          break;
       }
     }
 

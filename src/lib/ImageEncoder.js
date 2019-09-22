@@ -36,6 +36,9 @@ export default class ImageEncoder {
         if (imageCursor == imageData.length) {
           imageCursor = 0;
           LSB -= 1;
+          
+          if (LSB == -1)
+            break;
         }
       }
     }

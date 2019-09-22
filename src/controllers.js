@@ -74,14 +74,12 @@ const encryptText = (text, key) => {
 
 const decryptText = (text, key) => {
   try {
-    console.log(text, key)
     const textBuffer = Buffer.from(text, 'hex');
     const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, Buffer.from(key));
     let decrypted = decipher.update(textBuffer);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
   } catch (err) {
-    console.log(err);
     throw {
       statusCode: 400,
       message: 'Secret key is incorrect'
