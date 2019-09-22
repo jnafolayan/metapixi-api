@@ -6,6 +6,7 @@ import { encodeImage, decodeImage } from './controllers';
 
 const app = express();
 
+app.options(cors());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
