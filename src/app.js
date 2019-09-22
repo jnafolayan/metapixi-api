@@ -6,7 +6,12 @@ import { encodeImage, decodeImage } from './controllers';
 
 const app = express();
 
-app.use(cors({ origin: 'https://jnafolayan.github.io' }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://jnafolayan.github.io");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
