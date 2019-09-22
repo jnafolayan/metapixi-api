@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
     "@babel/preset-env": "^7.6.0",
     "nodemon": "^1.19.2"
   },

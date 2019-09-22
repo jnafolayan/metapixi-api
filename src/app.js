@@ -7,7 +7,7 @@ import { encodeImage, decodeImage } from './controllers';
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/encode', encodeImage);
 app.post('/decode', decodeImage);
