@@ -69,12 +69,12 @@ const encryptText = (text, key) => {
   const cipher = crypto.createCipher(ENCRYPTION_ALGORITHM, Buffer.from(key));
   let encrypted = cipher.update(text);
   encrypted = Buffer.concat([encrypted, cipher.final()]);
-  return encrypted.toString();
+  return encrypted.toString('hex');
 };
 
 const decryptText = (text, key) => {
   try {
-    const textBuffer = Buffer.from(text);
+    const textBuffer = Buffer.from(text, 'hex');
     const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, Buffer.from(key));
     let decrypted = decipher.update(textBuffer);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
