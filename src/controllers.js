@@ -27,6 +27,7 @@ export const encodeImage = [
     } catch (err) {
 
       res.status(err.statusCode || 500).json({
+        statusCode: err.statusCode || 500,
         message: err.message || err
       });
 
@@ -53,9 +54,8 @@ export const decodeImage = [
 
     } catch (err) {
 
-      console.log(err);
-
       res.status(err.statusCode || 500).json({
+        statusCode: err.statusCode || 500,
         message: err.message || err
       });
 
@@ -73,9 +73,16 @@ const encryptText = (text, key) => {
 };
 
 const decryptText = (text, key) => {
-  const textBuffer = Buffer.from(text, 'hex');
-  const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, Buffer.from(key));
-  let decrypted = decipher.update(textBuffer);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-  return decrypted.toString();
+  try {
+    const textBuffer = Buffer.from(text, 'hex');
+    const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, Buffer.from(key));
+    let decrypted = decipher.update(textBuffer);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
+  } catch (err) {
+    throw {
+      statusCode: 400,
+      message: 'Secret key is incorrect'
+    };
+  }
 };
