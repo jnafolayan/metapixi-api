@@ -11,6 +11,7 @@
     "build": "rm -rf dist && babel src --out-dir dist",
     "postinstall": "npm run build"
   },
+  "heroku-run-build-script": true,
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
