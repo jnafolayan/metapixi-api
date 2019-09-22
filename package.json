@@ -8,6 +8,7 @@
   "scripts": {
     "develop": "nodemon --exec babel-node src/www.js",
     "start": "node dist/app.js",
+    "heroku-postbuild": "rm -rf dist && babel src --out-dir dist",
     "build": "rm -rf dist && babel src --out-dir dist",
     "postinstall": "npm run build"
   },
