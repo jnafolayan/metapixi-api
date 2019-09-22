@@ -6,9 +6,9 @@ import { encodeImage, decodeImage } from './controllers';
 
 const app = express();
 
-app.options(cors());
-app.use(cors());
+app.use(cors({ origin: 'https://jnafolayan.github.io' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.post('/encode', encodeImage);
 app.post('/decode', decodeImage);
