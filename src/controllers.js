@@ -80,6 +80,7 @@ const decryptText = (text, key) => {
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
   } catch (err) {
+    console.log(err)
     throw {
       statusCode: 400,
       message: 'Secret key is incorrect'
