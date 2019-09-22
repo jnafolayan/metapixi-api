@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "develop": "nodemon --exec babel-node src/www.js",
-    "start": "node dist/app.js",
+    "start": "npm run build && node dist/app.js",
     "build": "rm -rf dist && babel src --out-dir dist",
     "postinstall": "npm run build"
   },
