@@ -73,6 +73,8 @@ const encryptText = (text, key) => {
 };
 
 const decryptText = (text, key) => {
+  console.log('text:', text);
+
   try {
     const textBuffer = Buffer.from(text, 'hex');
     const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, Buffer.from(key));

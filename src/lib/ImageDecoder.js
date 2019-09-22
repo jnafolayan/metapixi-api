@@ -37,6 +37,7 @@ export default class ImageDecoder {
       }
 
       if (++imageCursor == imageData.length) {
+    console.log('len', characterCount)
         imageCursor = 0;
         LSB -= 1;
 
