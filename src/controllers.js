@@ -87,7 +87,7 @@ const decryptText = (text, key) => {
   } catch (err) {
     throw {
       statusCode: 400,
-      message: 'Secret key is incorrect'
+      message: 'Could not decrypt image, sorry'
     };
   }
 };
