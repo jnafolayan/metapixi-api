@@ -4,7 +4,7 @@ import { BYTES_LENGTH } from '../constants';
 
 export default class ImageEncoder {
 
-  static async encode({ message, buffer }) {
+  static async encode({ message, buffer, mimetype }) {
 
     const image = await Jimp.read(buffer);
     const imageData = image.bitmap.data;
@@ -19,7 +19,7 @@ export default class ImageEncoder {
     // least significant bit
     let LSB = BYTES_LENGTH - 1;
     let imageCursor = 0;
-
+    
     while (binaryCodes.length) {
       const bytes = binaryCodes.shift();
       
@@ -46,8 +46,15 @@ export default class ImageEncoder {
         break;
     }
 
-    const base64 = await image.getBase64Async(Jimp.AUTO);
+    const newImage = await new Jimp(image.bitmap.width, image.bitmap.height);
+    newImage.scan(0, 0, image.bitmap.width, image.bitmap.height, function copy(x, y, idx) {
+      this.bitmap.data[idx + 0] = imageData[idx + 0];
+      this.bitmap.data[idx + 1] = imageData[idx + 1];
+      this.bitmap.data[idx + 2] = imageData[idx + 2];
+      this.bitmap.data[idx + 3] = imageData[idx + 3];
+    });
 
+    const base64 = await newImage.getBase64Async(Jimp.AUTO);
     return base64;
 
   }

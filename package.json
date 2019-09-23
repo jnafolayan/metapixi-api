@@ -6,10 +6,9 @@
   "author": "John Afolayan <jnafolayan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "develop": "nodemon --exec babel-node src/www.js",
+    "develop": "cross-env NODE_ENV=development nodemon --exec babel-node src/www.js",
     "start": "node dist/www.js",
-    "build": "rm -rf dist && babel src --out-dir dist",
-    "postinstall": "npm run build"
+    "build": "rm -rf dist && babel src --out-dir dist"
   },
   "heroku-run-build-script": true,
   "devDependencies": {
@@ -17,6 +16,7 @@
     "@babel/core": "^7.6.0",
     "@babel/node": "^7.6.1",
     "@babel/preset-env": "^7.6.0",
+    "cross-env": "^6.0.0",
     "nodemon": "^1.19.2"
   },
   "dependencies": {

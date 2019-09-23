@@ -13,11 +13,14 @@ export default class ImageDecoder {
     let imageCursor = 0;
     let binaryBuffer = '';
 
-    for (; imageCursor < BYTES_LENGTH; imageCursor++) {
+    while (binaryBuffer.length < BYTES_LENGTH) {
       const channel = imageData[imageCursor];
       const channelBytes = channel.toString(2).padStart(BYTES_LENGTH, '0');
+      
       const byte = channelBytes.charAt(LSB);
       binaryBuffer += byte;
+
+      imageCursor += 1;
     }
 
     let characterCount = parseInt(binaryBuffer, 2);

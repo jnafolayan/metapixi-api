@@ -7,25 +7,29 @@ import ImageDecoder from './lib/ImageDecoder';
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
+const uploadImage = upload.single('image');
 
 export const encodeImage = [
 
-  upload.single('image'),  
+  uploadImage,  
   async (req, res) => {
-    
+
     try {
 
       const result = await ImageEncoder.encode({
         message: encryptText(req.body.message, req.body.secretKey),
-        buffer: req.file.buffer
+        buffer: req.file.buffer,
+        mimetype: req.file.mimetype
       });
 
+      req.file = null;
       res.status(200).json({
         image: result
       });
 
     } catch (err) {
 
+      console.log(err)
       res.status(err.statusCode || 500).json({
         statusCode: err.statusCode || 500,
         message: err.message || err
@@ -39,7 +43,7 @@ export const encodeImage = [
 
 export const decodeImage = [
 
-  upload.single('image'),  
+  uploadImage,  
   async (req, res) => {
     
     try {
@@ -53,7 +57,8 @@ export const decodeImage = [
       });
 
     } catch (err) {
-
+      
+      console.error(err);
       res.status(err.statusCode || 500).json({
         statusCode: err.statusCode || 500,
         message: err.message || err
@@ -73,8 +78,6 @@ const encryptText = (text, key) => {
 };
 
 const decryptText = (text, key) => {
-  console.log('text:', text);
-
   try {
     const textBuffer = Buffer.from(text, 'hex');
     const decipher = crypto.createDecipher(ENCRYPTION_ALGORITHM, Buffer.from(key));
@@ -82,7 +85,6 @@ const decryptText = (text, key) => {
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString();
   } catch (err) {
-    console.log(err)
     throw {
       statusCode: 400,
       message: 'Secret key is incorrect'

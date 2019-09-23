@@ -7,7 +7,10 @@ import { encodeImage, decodeImage } from './controllers';
 const app = express();
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://jnafolayan.github.io");
+  if (process.env.NODE_ENV == 'development')
+    res.header("Access-Control-Allow-Origin", "*");
+  else 
+    res.header("Access-Control-Allow-Origin", "https://jnafolayan.github.io");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
