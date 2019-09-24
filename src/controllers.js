@@ -22,7 +22,6 @@ export const encodeImage = [
         mimetype: req.file.mimetype
       });
 
-      req.file = null;
       res.status(200).json({
         image: result
       });

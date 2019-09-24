@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "develop": "cross-env NODE_ENV=development nodemon --exec babel-node src/www.js",
-    "start": "node dist/www.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "build": "rm -rf dist && babel src --out-dir dist"
   },
   "heroku-run-build-script": true,
@@ -24,6 +24,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jimp": "^0.8.4",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "pm2": "^3.5.1"
   }
 }
