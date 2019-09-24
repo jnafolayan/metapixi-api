@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'metapixi',
-    script: './dist/app.js',
+    script: './dist/www.js',
     instances: 'max',
     autorestart: true,
     env: {
